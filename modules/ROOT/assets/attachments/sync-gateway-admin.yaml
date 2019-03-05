@@ -2089,14 +2089,19 @@ definitions:
                       type: integer
                     num_doc_reads_blip:
                       type: integer
+                      description: Count of the number of documents read via replication since Sync Gateway startup.
                     num_doc_reads_rest:
                       type: integer
+                      description: Count of the number of documents read via the REST API since Sync Gateway startup.
                     num_doc_writes:
                       type: integer
+                      description: Count of the number of documents written via any means since Sync Gateway startup.
                     num_replications_active:
                       type: integer
+                      description: Approximate number of active replications. Only counts continuous pull replications.
                     num_replications_total:
                       type: integer
+                      description: Count of the number of replications created since Sync Gateway startup.
                     sequence_get_count:
                       type: integer
                     sequence_released_count:
