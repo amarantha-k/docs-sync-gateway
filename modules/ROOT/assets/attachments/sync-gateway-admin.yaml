@@ -1237,7 +1237,7 @@ paths:
       - server
       summary: Remove obsolete design documents
       description: |
-        Starting in Sync Gateway 2.0, design documents used internally by Sync Gateway will include a version number in their name. After the upgrade is performed, previous design documents are not automatically removed since other Sync Gateway nodes may still be using them. This endpoint should be used to remove those previous design documents ([upgrade guide](upgrade.html#upgrade)). The `preview=true` query string option can be used to list design documents which would be removed.
+        Starting in Sync Gateway 2.0, design documents used internally by Sync Gateway will include a version number in their name. After the upgrade is performed, previous design documents are not automatically removed since other Sync Gateway nodes may still be using them. This endpoint should be used to remove those previous design documents (also see [2.0 release notes](../release-notes/index.html)). The `preview=true` query string option can be used to list design documents which would be removed.
       parameters:
       - $ref: '#/parameters/upgrade_preview'
       responses:
@@ -2065,54 +2065,23 @@ definitions:
                       type: integer
                     rev_cache_misses:
                       type: integer
-                database:
+                security:
                   type: object
-                  description: Stats relative to the database
+                  description: Stats relative to security
                   properties:
-                    abandoned_seqs:
+                    auth_failed_count:
                       type: integer
-                    crc32c_match_count:
+                      description: Number of unsuccessful authentications. Useful to monitor the number of authentication errors.
+                    auth_success_count:
                       type: integer
-                    dcp_caching_count:
+                      description: Number of successful authentications. Useful to monitor the number of authenticated requests.
+                    num_access_errors:
                       type: integer
-                    dcp_caching_time:
+                      description: Count of documents rejected by write access functions (requireAccess/requireRole/requireUser).
+                    num_docs_rejected:
                       type: integer
-                    dcp_received_count:
-                      type: integer
-                    dcp_received_time:
-                      type: integer
-                    doc_reads_bytes_blip:
-                      type: integer
-                    doc_writes_bytes:
-                      type: integer
-                    doc_writes_bytes_blip:
-                      type: integer
-                    num_doc_reads_blip:
-                      type: integer
-                      description: Count of the number of documents read via replication since Sync Gateway startup.
-                    num_doc_reads_rest:
-                      type: integer
-                      description: Count of the number of documents read via the REST API since Sync Gateway startup.
-                    num_doc_writes:
-                      type: integer
-                      description: Count of the number of documents written via any means since Sync Gateway startup.
-                    num_replications_active:
-                      type: integer
-                      description: Approximate number of active replications. Only counts continuous pull replications.
-                    num_replications_total:
-                      type: integer
-                      description: Count of the number of replications created since Sync Gateway startup.
-                    sequence_get_count:
-                      type: integer
-                    sequence_released_count:
-                      type: integer
-                    sequence_reserved_count:
-                      type: integer
-                    warn_channels_per_doc_count:
-                      type: integer
-                    warn_grants_per_doc_count:
-                      type: integer
-                    warn_xattr_size_count:
+                      description: Count of documents rejected by the sync function. Useful to debug sync function issues and identify unexpected incoming documents.
+                    total_auth_time:
                       type: integer
   Forbidden:
     type: object
